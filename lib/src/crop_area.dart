@@ -20,6 +20,17 @@ class CropArea {
     double cornerSize = 32.0,
   }) : _cornerSize = cornerSize;
 
+  void updateBounds(Rect bounds) {
+    _bounds = bounds;
+    _cropRect = Rect.fromLTRB(
+      _applyLeftBounds(_cropRect.left),
+      _applyTopBounds(_cropRect.top),
+      _applyRightBounds(_cropRect.right),
+      _applyBottomBounds(_cropRect.bottom),
+    );
+    _updateCorners();
+  }
+
   void initSizes({
     @required Offset center,
     @required double width,
